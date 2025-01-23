@@ -1,0 +1,75 @@
+netcdf common_gom {
+dimensions:
+    xi_rho = 402 ;
+    eta_rho = 482 ;
+    N = 23;
+    ocean_time = UNLIMITED;
+variables:
+    double lat_rho(eta_rho, xi_rho) ;
+        lat_rho:long_name = "latitude of RHO-points" ;
+        lat_rho:units = "degree_north" ;
+    double lon_rho(eta_rho, xi_rho) ;
+        lon_rho:long_name = "longitude of RHO-points" ;
+        lon_rho:units = "degree_east" ;
+    double z_rho(N);
+        z_rho:long_name = "z-level depth" ;
+        z_rho:valid_min = -4500. ;
+        z_rho:valid_max = 0. ;
+        z_rho:positive = "up" ;
+        z_rho:standard_name = "depth" ;
+        z_rho:units = "meters" ;
+    double mask_rho(eta_rho, xi_rho) ;
+	mask_rho:long_name = "mask on RHO-points" ;
+	mask_rho:flag_values = 0., 1. ;
+	mask_rho:flag_meanings = "land water" ;
+	mask_rho:coordinates = "lon_rho lat_rho" ;
+    double ocean_time(ocean_time) ;
+        ocean_time:long_name = "time since initialization" ;
+        ocean_time:units = "seconds since 1858-11-17 00:00:00" ;
+        ocean_time:calendar = "gregorian" ;
+        ocean_time:field = "time, scalar, series" ;
+    double h(eta_rho, xi_rho) ;
+        h:long_name = "bathymetry at RHO-points" ;
+        h:units = "meter" ;
+        h:coordinates = "lon_rho lat_rho" ;
+        h:field = "bath, scalar" ;
+    float zeta(ocean_time, eta_rho, xi_rho) ;
+        zeta:long_name = "free-surface" ;
+        zeta:units = "meter" ;
+        zeta:time = "ocean_time" ;
+        zeta:coordinates = "lon_rho lat_rho ocean_time" ;
+        zeta:field = "free-surface, scalar, series" ;
+        zeta:_FillValue = 1.e+37f ;
+    float temp(ocean_time, N, eta_rho, xi_rho) ;
+        temp:long_name = "potential temperature" ;
+        temp:units = "Celsius" ;
+        temp:time = "ocean_time" ;
+        temp:coordinates = "lon_rho lat_rho z_rho ocean_time" ;
+        temp:field = "temperature, scalar, series" ;
+        temp:_FillValue = 1.e+37f ;
+    float salt(ocean_time, N, eta_rho, xi_rho) ;
+        salt:long_name = "salinity" ;
+        salt:time = "ocean_time" ;
+        salt:coordinates = "lon_rho lat_rho z_rho ocean_time" ;
+        salt:field = "salinity, scalar, series" ;
+        salt:_FillValue = 1.e+37f ;
+    float u(ocean_time, N, eta_rho, xi_rho) ;
+        u:long_name = "u-momentum component" ;
+        u:units = "meter second-1" ;
+        u:time = "ocean_time" ;
+        u:coordinates = "lon_rho lat_rho z_rho ocean_time" ;
+        u:field = "u-velocity, scalar, series" ;
+        u:_FillValue = 1.e+37f ;
+    float v(ocean_time, N, eta_rho, xi_rho) ;
+        v:long_name = "v-momentum component" ;
+        v:units = "meter second-1" ;
+        v:time = "ocean_time" ;
+        v:coordinates = "lon_rho lat_rho z_rho ocean_time" ;
+        v:field = "v-velocity, scalar, series" ;
+        v:_FillValue = 1.e+37f ;
+// global attributes:
+        :Conventions = "CF-1.0" ;
+        :title = "USEast Z-Interp NCL/ROMS Output File" ;
+}
+
+

@@ -1,0 +1,10 @@
+Lovingly prepared for Chris MacIntosh
+
+23 January 2025
+Joseph B. Zambon
+joseph.zambon@gmail.com
+
+
+To run, do this
+
+$root/ncl $namelist_dir"roms_zlevs_driver.ncl" 'file_in="'$coawst_output'ROMS/useast_his_L1.nc"' 'file_out="'$coawst_output'ROMS/useast_zlevs_L1.nc"' 'cdl_file="'$namelist_dir'useast_domain_L1.cdl"' >& $coawst_output'ROMS/ncl_r01_zlevs.log' &
